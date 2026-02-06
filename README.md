@@ -4,7 +4,7 @@ A modern, responsive task management application built with React, TypeScript, a
 
 ## Tech Stack
 
-- **React 18** - UI library
+- **React 19** - UI library
 - **TypeScript** - Type safety
 - **Vite** - Fast build tool and dev server
 - **CSS3** - Styling
@@ -137,5 +137,3 @@ The frontend connects to the Task Manager Backend API with the following endpoin
 - Firefox (latest)
 - Safari (latest)
 - Edge (latest)
-
-**Built with ❤️ using React + TypeScript + Vite**
