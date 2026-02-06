@@ -1,73 +1,141 @@
-# React + TypeScript + Vite
+# Task Manager Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive task management application built with React, TypeScript, and Vite.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React 18** - UI library
+- **TypeScript** - Type safety
+- **Vite** - Fast build tool and dev server
+- **CSS3** - Styling
 
-## React Compiler
+## Features
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+- ✅ Create new tasks
+- ✅ View all tasks with filtering (pending/completed)
+- ✅ Pagination support
+- ✅ Mark tasks as completed or pending
+- ✅ Delete tasks
+- ✅ Responsive design
+- ✅ Real-time updates
+- ✅ Error handling with user feedback
 
-## Expanding the ESLint configuration
+## Project Structure
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+task-manager-frontend/
+│
+├── src/
+│   ├── api/
+│   │   └── httpClient.ts       # API service
+│   │   └── index.ts            # API barrel file
+│   │   └── taskApi.ts          # Backend API calls
+│   │
+│   ├── assets/                 # Static assets (images, icons)
+│   │
+│   ├── components/             # Reusable React components
+│   │   ├── ConfirmModal.tsx    # Confirmation Modal
+│   │   ├── Pagination.tsx      # Pagination control
+│   │   ├── TaskFilter.tsx      # Filter control
+│   │   ├── TaskInput.tsx       # Create task form
+│   │   ├── TaskList.tsx        # Task list display
+│   │   ├── TaskItem.tsx        # Individual task card
+│   │   └── Toast.tsx           # Display toast when actions are performed
+│   │
+│   ├── types/                  # TypeScript type definitions
+│   │   └── componentTypes
+│   │       └── task.types.ts   # Task interfaces and types
+│   │   └── api.types.ts        # API request, response, error interfaces and types
+│   │
+│   ├── App.tsx                 # Main application component
+│   ├── App.css                 # Application styles
+│   ├── main.tsx                # Application entry point
+│   └── main.css                # Global styles
+│
+├── public/                     # Static public assets
+├── .env                        # Environment variables
+├── .gitignore                  # Git ignore rules
+├── index.html                  # HTML entry point
+├── package.json                # Dependencies and scripts
+├── tsconfig.json               # TypeScript configuration
+├── vite.config.ts              # Vite configuration
+└── README.md                   # Project documentation
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Setup Instructions
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Prerequisites
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- Node.js (v16 or higher)
+- npm or yarn
+- Task Manager Backend running on `http://localhost:8000`
+
+### Installation
+
+1. **Install dependencies:**
+
+   ```bash
+   npm install
+   ```
+
+2. **Configure environment variables:**
+
+   Create a `.env` file in the root directory:
+
+   ```env
+   VITE_API_BASE_URL=http://localhost:5000/api
+   ```
+
+3. **Start the development server:**
+
+   ```bash
+   npm run dev
+   ```
+
+4. **Open your browser:**
+   ```
+   http://localhost:5173
+   ```
+
+## Available Scripts
+
+| Command           | Description              |
+| ----------------- | ------------------------ |
+| `npm run dev`     | Start development server |
+| `npm run build`   | Build for production     |
+| `npm run preview` | Preview production build |
+| `npm run lint`    | Run ESLint               |
+
+## Environment Variables
+
+| Variable            | Description          | Example                     |
+| ------------------- | -------------------- | --------------------------- |
+| `VITE_API_BASE_URL` | Backend API base URL | `http://localhost:5000/api` |
+
+**Note:** All environment variables must be prefixed with `VITE_` to be accessible in the application.
+
+## API Integration
+
+The frontend connects to the Task Manager Backend API with the following endpoints:
+
+| Method | Endpoint     | Description                  |
+| ------ | ------------ | ---------------------------- |
+| GET    | `/tasks`     | Fetch all tasks with filters |
+| POST   | `/tasks`     | Create a new task            |
+| PATCH  | `/tasks/:id` | Update task status           |
+| DELETE | `/tasks/:id` | Delete a task                |
+
+### Query Parameters (GET /tasks)
+
+- `status` - Filter by status (`pending` or `completed`)
+- `page` - Page number (default: 1)
+- `limit` - Items per page (default: 10)
+
+## Browser Support
+
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
+
+**Built with ❤️ using React + TypeScript + Vite**
