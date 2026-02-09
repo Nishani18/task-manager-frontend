@@ -110,7 +110,7 @@ task-manager-frontend/
 
 | Variable            | Description          | Example                     |
 | ------------------- | -------------------- | --------------------------- |
-| `VITE_API_BASE_URL` | Backend API base URL | `http://localhost:5000/api` |
+| `VITE_API_BASE_URL` | Backend API base URL | `http://localhost:5000/api/tasks` |
 
 **Note:** All environment variables must be prefixed with `VITE_` to be accessible in the application.
 
